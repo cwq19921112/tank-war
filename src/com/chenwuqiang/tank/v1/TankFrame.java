@@ -15,14 +15,15 @@ import java.util.List;
 public class TankFrame extends Frame {
     public static final int FRAME_WIDTH = 800;
     public static final int FRAME_HEIGHT = 600;
-    private static final int INIT_MY_TANK_X = 200;
-    private static final int INIT_MY_TANK_Y = 200;
+    private static final int INIT_MY_TANK_X = 350;
+    private static final int INIT_MY_TANK_Y = 400;
     private boolean bL = false;
     private boolean bR = false;
     private boolean bU = false;
     private boolean bD = false;
     private Tank mainTank = new Tank(INIT_MY_TANK_X, INIT_MY_TANK_Y, Dir.UP, this);
     private List<Bullet> bulletList = new ArrayList<>();
+    private List<Tank> badTankList = new ArrayList<>();
 
     public TankFrame() {
         setSize(FRAME_WIDTH, FRAME_HEIGHT);
@@ -36,6 +37,11 @@ public class TankFrame extends Frame {
             }
         });
         addKeyListener(new MyKeyListener());
+        // 初始化敌军坦克
+        for (int i = 0; i < 5; i++) {
+            Tank tank = new Tank(200 + 100 * i, 100, Dir.DOWN, this);
+            badTankList.add(tank);
+        }
     }
 
     @Override
@@ -49,6 +55,10 @@ public class TankFrame extends Frame {
         for (int i = 0; i < bulletList.size(); i++) {
             Bullet bullet = bulletList.get(i);
             bullet.paint(g);
+        }
+        for (int i = 0; i < badTankList.size(); i++) {
+            Tank badTank = badTankList.get(i);
+            badTank.paint(g);
         }
     }
 
@@ -141,5 +151,13 @@ public class TankFrame extends Frame {
         gOffScreen.setColor(c);
         paint(gOffScreen);
         g.drawImage(offScreenImage, 0, 0, null);
+    }
+
+    public List<Tank> getBadTankList() {
+        return badTankList;
+    }
+
+    public void setBadTankList(List<Tank> badTankList) {
+        this.badTankList = badTankList;
     }
 }
