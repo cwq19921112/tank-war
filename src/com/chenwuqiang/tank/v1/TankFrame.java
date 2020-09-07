@@ -41,7 +41,8 @@ public class TankFrame extends Frame {
     @Override
     public void paint(Graphics g) {
         Color color = g.getColor();
-        g.setColor(Color.BLACK);
+        g.fillRect(0,0, FRAME_WIDTH, FRAME_HEIGHT);
+        g.setColor(Color.WHITE);
         g.drawString("子弹的数量" + bulletList.size(), 10, 80);
         g.setColor(color);
         mainTank.paint(g);
@@ -130,14 +131,15 @@ public class TankFrame extends Frame {
     private Image offScreenImage = null;
     @Override
     public void update(Graphics g) {
-        if(offScreenImage == null) {
+        if (offScreenImage == null) {
             offScreenImage = this.createImage(FRAME_WIDTH, FRAME_HEIGHT);
-            //这是游戏窗口的宽度和高度
         }
-
-        Graphics gOff = offScreenImage.getGraphics();
-        gOff.clearRect(0, 0, FRAME_WIDTH, FRAME_WIDTH);
-        paint(gOff);
+        Graphics gOffScreen = offScreenImage.getGraphics();
+        Color c = gOffScreen.getColor();
+        gOffScreen.setColor(Color.BLACK);
+        gOffScreen.fillRect(0, 0, FRAME_WIDTH, FRAME_HEIGHT);
+        gOffScreen.setColor(c);
+        paint(gOffScreen);
         g.drawImage(offScreenImage, 0, 0, null);
     }
 }

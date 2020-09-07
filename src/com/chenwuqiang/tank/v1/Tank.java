@@ -13,6 +13,8 @@ public class Tank {
     private boolean moving;
     private Dir dir;
     private TankFrame tankFrame;
+    public static final int WIDTH = ResourceMgr.goodTankU.getWidth();
+    public static final int HEIGHT = ResourceMgr.goodTankU.getHeight();
 
     public Tank(int x, int y, Dir dir, TankFrame tankFrame) {
         this.x = x;
@@ -22,8 +24,22 @@ public class Tank {
     }
 
     public void paint(Graphics g) {
-//        g.fillRect(x, y, 50, 50);
-        g.drawImage(ResourceMgr.goodTankU, x, y, null);
+        switch (dir) {
+            case UP:
+                g.drawImage(ResourceMgr.goodTankU, x, y, null);
+                break;
+            case DOWN:
+                g.drawImage(ResourceMgr.goodTankD, x, y, null);
+                break;
+            case LEFT:
+                g.drawImage(ResourceMgr.goodTankL, x, y, null);
+                break;
+            case RIGHT:
+                g.drawImage(ResourceMgr.goodTankR, x, y, null);
+                break;
+            default:
+                break;
+        }
         move();
     }
 
