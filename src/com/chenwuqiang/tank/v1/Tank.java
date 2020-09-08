@@ -1,6 +1,7 @@
 package com.chenwuqiang.tank.v1;
 
 import java.awt.*;
+import java.util.Random;
 
 /**
  * @author: Administrator
@@ -14,6 +15,7 @@ public class Tank {
     private boolean alive = true;
     private Dir dir;
     private TankFrame tankFrame;
+    private Random random = new Random();
     public static final int WIDTH = ResourceMgr.goodTankU.getWidth();
     public static final int HEIGHT = ResourceMgr.goodTankU.getHeight();
 
@@ -46,6 +48,9 @@ public class Tank {
                 break;
         }
         move();
+        if (random.nextInt(30) > 28) {
+            fire();
+        }
     }
 
     public void fire() {
@@ -113,5 +118,9 @@ public class Tank {
 
     public void setAlive(boolean alive) {
         this.alive = alive;
+    }
+
+    public void die() {
+        alive = false;
     }
 }

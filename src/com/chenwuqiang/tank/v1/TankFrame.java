@@ -40,6 +40,7 @@ public class TankFrame extends Frame {
         // 初始化敌军坦克
         for (int i = 0; i < 5; i++) {
             Tank tank = new Tank(200 + 100 * i, 100, Dir.DOWN, this);
+            tank.setMoving(true);
             badTankList.add(tank);
         }
     }

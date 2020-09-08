@@ -105,8 +105,12 @@ public class Bullet {
         Rectangle rectangle2 = new Rectangle(tank.getX(), tank.getY(), Tank.WIDTH, Tank.HEIGHT);
         boolean intersects = rectangle1.intersects(rectangle2);
         if (intersects) {
-            isAlive = false;
-            tank.setAlive(false);
+            die();
+            tank.die();
         }
+    }
+
+    private void die() {
+        isAlive = false;
     }
 }
