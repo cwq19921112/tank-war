@@ -21,7 +21,7 @@ public class TankFrame extends Frame {
     private boolean bR = false;
     private boolean bU = false;
     private boolean bD = false;
-    private Tank mainTank = new Tank(INIT_MY_TANK_X, INIT_MY_TANK_Y, Dir.UP, this);
+    private Tank mainTank = new Tank(INIT_MY_TANK_X, INIT_MY_TANK_Y, Dir.UP, this, Group.GOOD);
     private List<Bullet> bulletList = new ArrayList<>();
     private List<Tank> badTankList = new ArrayList<>();
 
@@ -39,7 +39,7 @@ public class TankFrame extends Frame {
         addKeyListener(new MyKeyListener());
         // 初始化敌军坦克
         for (int i = 0; i < 5; i++) {
-            Tank tank = new Tank(200 + 100 * i, 100, Dir.DOWN, this);
+            Tank tank = new Tank(200 + 100 * i, 100, Dir.DOWN, this, Group.BAD);
             tank.setMoving(true);
             badTankList.add(tank);
         }

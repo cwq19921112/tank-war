@@ -15,15 +15,17 @@ public class Tank {
     private boolean alive = true;
     private Dir dir;
     private TankFrame tankFrame;
+    private Group group;
     private Random random = new Random();
     public static final int WIDTH = ResourceMgr.goodTankU.getWidth();
     public static final int HEIGHT = ResourceMgr.goodTankU.getHeight();
 
-    public Tank(int x, int y, Dir dir, TankFrame tankFrame) {
+    public Tank(int x, int y, Dir dir, TankFrame tankFrame, Group group) {
         this.x = x;
         this.y = y;
         this.dir = dir;
         this.tankFrame = tankFrame;
+        this.group = group;
     }
 
     public void paint(Graphics g) {
@@ -48,13 +50,13 @@ public class Tank {
                 break;
         }
         move();
-        if (random.nextInt(30) > 28) {
+        if (Group.BAD.equals(group) && random.nextInt(30) > 28) {
             fire();
         }
     }
 
     public void fire() {
-        Bullet bullet = new Bullet(x, y, dir, tankFrame);
+        Bullet bullet = new Bullet(x, y, dir, tankFrame, group);
         tankFrame.getBulletList().add(bullet);
     }
 
@@ -122,5 +124,13 @@ public class Tank {
 
     public void die() {
         alive = false;
+    }
+
+    public Group getGroup() {
+        return group;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
     }
 }

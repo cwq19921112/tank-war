@@ -12,15 +12,17 @@ public class Bullet {
     private int y;
     private boolean isAlive = true;
     private Dir dir;
+    private Group group;
     private TankFrame tankFrame;
     public static final int WIDTH = ResourceMgr.bulletU.getWidth();
     public static final int HEIGHT = ResourceMgr.bulletU.getHeight();
 
-    public Bullet(int x, int y, Dir dir, TankFrame tankFrame) {
+    public Bullet(int x, int y, Dir dir, TankFrame tankFrame, Group group) {
         this.x = x + (Tank.WIDTH - WIDTH) / 2;
         this.y = y + (Tank.HEIGHT - HEIGHT) / 2;
         this.dir = dir;
         this.tankFrame = tankFrame;
+        this.group = group;
     }
 
     public void paint(Graphics g) {
@@ -101,6 +103,9 @@ public class Bullet {
     }
 
     public void collideWith(Tank tank) {
+        if (group.equals(tank.getGroup())) {
+            return;
+        }
         Rectangle rectangle1 = new Rectangle(x, y, WIDTH, HEIGHT);
         Rectangle rectangle2 = new Rectangle(tank.getX(), tank.getY(), Tank.WIDTH, Tank.HEIGHT);
         boolean intersects = rectangle1.intersects(rectangle2);
@@ -112,5 +117,13 @@ public class Bullet {
 
     private void die() {
         isAlive = false;
+    }
+
+    public Group getGroup() {
+        return group;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
     }
 }
