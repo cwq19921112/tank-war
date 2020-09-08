@@ -99,4 +99,14 @@ public class Bullet {
     public void setAlive(boolean alive) {
         isAlive = alive;
     }
+
+    public void collideWith(Tank tank) {
+        Rectangle rectangle1 = new Rectangle(x, y, WIDTH, HEIGHT);
+        Rectangle rectangle2 = new Rectangle(tank.getX(), tank.getY(), Tank.WIDTH, Tank.HEIGHT);
+        boolean intersects = rectangle1.intersects(rectangle2);
+        if (intersects) {
+            isAlive = false;
+            tank.setAlive(false);
+        }
+    }
 }

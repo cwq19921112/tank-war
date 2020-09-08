@@ -11,6 +11,7 @@ public class Tank {
     private int x;
     private int y;
     private boolean moving;
+    private boolean alive = true;
     private Dir dir;
     private TankFrame tankFrame;
     public static final int WIDTH = ResourceMgr.goodTankU.getWidth();
@@ -24,6 +25,10 @@ public class Tank {
     }
 
     public void paint(Graphics g) {
+        if (!alive) {
+            tankFrame.getBadTankList().remove(this);
+            return;
+        }
         switch (dir) {
             case UP:
                 g.drawImage(ResourceMgr.goodTankU, x, y, null);
@@ -100,5 +105,13 @@ public class Tank {
 
     public void setMoving(boolean moving) {
         this.moving = moving;
+    }
+
+    public boolean isAlive() {
+        return alive;
+    }
+
+    public void setAlive(boolean alive) {
+        this.alive = alive;
     }
 }
