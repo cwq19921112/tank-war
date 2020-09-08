@@ -60,6 +60,11 @@ public class Tank {
         tankFrame.getBulletList().add(bullet);
     }
 
+    public void explode() {
+        Explode explode = new Explode(x, y, tankFrame);
+        tankFrame.getExplodeList().add(explode);
+    }
+
     private void move() {
         if (!moving) {
             return;

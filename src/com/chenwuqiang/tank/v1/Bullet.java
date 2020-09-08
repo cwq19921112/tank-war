@@ -112,6 +112,7 @@ public class Bullet {
         if (intersects) {
             die();
             tank.die();
+            tank.explode();
         }
     }
 

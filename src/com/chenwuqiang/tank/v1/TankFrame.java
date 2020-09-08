@@ -24,6 +24,7 @@ public class TankFrame extends Frame {
     private Tank mainTank = new Tank(INIT_MY_TANK_X, INIT_MY_TANK_Y, Dir.UP, this, Group.GOOD);
     private List<Bullet> bulletList = new ArrayList<>();
     private List<Tank> badTankList = new ArrayList<>();
+    private List<Explode> explodeList = new ArrayList<>();
 
     public TankFrame() {
         setSize(FRAME_WIDTH, FRAME_HEIGHT);
@@ -52,6 +53,7 @@ public class TankFrame extends Frame {
         g.setColor(Color.WHITE);
         g.drawString("子弹的数量" + bulletList.size(), 10, 80);
         g.drawString("敌方坦克的数量" + badTankList.size(), 10, 100);
+        g.drawString("爆炸的数量" + explodeList.size(), 10, 120);
         g.setColor(color);
         mainTank.paint(g);
         for (int i = 0; i < bulletList.size(); i++) {
@@ -61,6 +63,10 @@ public class TankFrame extends Frame {
         for (int i = 0; i < badTankList.size(); i++) {
             Tank badTank = badTankList.get(i);
             badTank.paint(g);
+        }
+        for (int i = 0; i < explodeList.size(); i++) {
+            Explode explode = explodeList.get(i);
+            explode.paint(g);
         }
         // 碰撞检测
         for (Bullet bullet : bulletList) {
@@ -167,5 +173,13 @@ public class TankFrame extends Frame {
 
     public void setBadTankList(List<Tank> badTankList) {
         this.badTankList = badTankList;
+    }
+
+    public List<Explode> getExplodeList() {
+        return explodeList;
+    }
+
+    public void setExplodeList(List<Explode> explodeList) {
+        this.explodeList = explodeList;
     }
 }

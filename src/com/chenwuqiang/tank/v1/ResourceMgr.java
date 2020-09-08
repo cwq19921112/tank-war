@@ -4,6 +4,8 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ResourceMgr {
     public static BufferedImage goodTankU;
@@ -14,25 +16,22 @@ public class ResourceMgr {
     public static BufferedImage bulletD;
     public static BufferedImage bulletL;
     public static BufferedImage bulletR;
+    public static List<BufferedImage> explodeImgs = new ArrayList<>();
 
     static {
         try {
-            InputStream UStream = ResourceMgr.class.getClassLoader().getResourceAsStream("images/tankU.gif");
-            goodTankU = ImageIO.read(UStream);
-            InputStream DStream = ResourceMgr.class.getClassLoader().getResourceAsStream("images/tankD.gif");
-            goodTankD = ImageIO.read(DStream);
-            InputStream LStream = ResourceMgr.class.getClassLoader().getResourceAsStream("images/tankL.gif");
-            goodTankL = ImageIO.read(LStream);
-            InputStream RStream = ResourceMgr.class.getClassLoader().getResourceAsStream("images/tankR.gif");
-            goodTankR = ImageIO.read(RStream);
-            InputStream bulletUStream = ResourceMgr.class.getClassLoader().getResourceAsStream("images/bulletU.gif");
-            bulletU = ImageIO.read(bulletUStream);
-            InputStream bulletDStream = ResourceMgr.class.getClassLoader().getResourceAsStream("images/bulletD.gif");
-            bulletD = ImageIO.read(bulletDStream);
-            InputStream bulletLStream = ResourceMgr.class.getClassLoader().getResourceAsStream("images/bulletL.gif");
-            bulletL = ImageIO.read(bulletLStream);
-            InputStream bulletRStream = ResourceMgr.class.getClassLoader().getResourceAsStream("images/bulletR.gif");
-            bulletR = ImageIO.read(bulletRStream);
+            ClassLoader classLoader = ResourceMgr.class.getClassLoader();
+            goodTankU = ImageIO.read(classLoader.getResourceAsStream("images/tankU.gif"));
+            goodTankD = ImageIO.read(classLoader.getResourceAsStream("images/tankD.gif"));
+            goodTankL = ImageIO.read(classLoader.getResourceAsStream("images/tankL.gif"));
+            goodTankR = ImageIO.read(classLoader.getResourceAsStream("images/tankR.gif"));
+            bulletU = ImageIO.read(classLoader.getResourceAsStream("images/bulletU.gif"));
+            bulletD = ImageIO.read(classLoader.getResourceAsStream("images/bulletD.gif"));
+            bulletL = ImageIO.read(classLoader.getResourceAsStream("images/bulletL.gif"));
+            bulletR = ImageIO.read(classLoader.getResourceAsStream("images/bulletR.gif"));
+            for (int i = 0; i < 16; i++) {
+                explodeImgs.add(ImageIO.read(classLoader.getResourceAsStream("images/e" + (i + 1) + ".gif")));
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
