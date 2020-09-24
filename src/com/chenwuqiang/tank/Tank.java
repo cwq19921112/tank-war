@@ -8,11 +8,14 @@ import java.util.Random;
  * @date: 2020/8/30 0030 17:44
  **/
 public class Tank {
-    private static final int SPEED = 3;
+    public static final int DEFAULT_SPEED = 5;
+    public static final int MAIN_SPEED = 8;
+    public static final int BAD_SPEED = 5;
     private int x;
     private int y;
     private boolean moving;
     private boolean alive = true;
+    private int speed;
     private Dir dir;
     private TankFrame tankFrame;
     private Group group;
@@ -20,12 +23,13 @@ public class Tank {
     public static final int WIDTH = ResourceMgr.goodTankU.getWidth();
     public static final int HEIGHT = ResourceMgr.goodTankU.getHeight();
 
-    public Tank(int x, int y, Dir dir, TankFrame tankFrame, Group group) {
+    public Tank(int x, int y, int speed, Dir dir, TankFrame tankFrame, Group group) {
         this.x = x;
         this.y = y;
         this.dir = dir;
         this.tankFrame = tankFrame;
         this.group = group;
+        this.speed = speed;
     }
 
     public void paint(Graphics g) {
@@ -49,6 +53,10 @@ public class Tank {
             default:
                 break;
         }
+        // 敌方坦克随机改变方向
+        if (Group.BAD.equals(group) && random.nextInt(100) > 97) {
+            dir = Dir.values()[random.nextInt(Dir.values().length)];
+        }
         move();
         if (Group.BAD.equals(group) && random.nextInt(30) > 28) {
             fire();
@@ -71,16 +79,16 @@ public class Tank {
         }
         switch (dir) {
             case LEFT:
-                x -= SPEED;
+                x -= speed;
                 break;
             case RIGHT:
-                x += SPEED;
+                x += speed;
                 break;
             case UP:
-                y -= SPEED;
+                y -= speed;
                 break;
             case DOWN:
-                y += SPEED;
+                y += speed;
                 break;
             default:
                 break;
@@ -137,5 +145,13 @@ public class Tank {
 
     public void setGroup(Group group) {
         this.group = group;
+    }
+
+    public int getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(int speed) {
+        this.speed = speed;
     }
 }
