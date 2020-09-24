@@ -17,6 +17,8 @@ public class Bullet {
     private Tank tank;
     private int width;
     private int height;
+    Rectangle rectangle1 = new Rectangle();
+    Rectangle rectangle2 = new Rectangle();
 
     public Bullet(int x, int y, Dir dir, TankFrame tankFrame,Tank tank, Group group) {
         this.dir = dir;
@@ -109,14 +111,18 @@ public class Bullet {
         if (group.equals(tank.getGroup())) {
             return;
         }
-        Rectangle rectangle1 = new Rectangle(x, y, width, height);
-        Rectangle rectangle2 = new Rectangle(tank.getX(), tank.getY(), tank.getWidth(), tank.getHeight());
+        changeRec(rectangle1, x, y, width, height);
+        changeRec(rectangle2, tank.getX(), tank.getY(), tank.getWidth(), tank.getHeight());
         boolean intersects = rectangle1.intersects(rectangle2);
         if (intersects) {
             die();
             tank.die();
             tank.explode();
         }
+    }
+
+    private void changeRec(Rectangle rectangle, int x, int y, int width, int height) {
+        rectangle.setBounds(x, y, width, height);
     }
 
     private void die() {
