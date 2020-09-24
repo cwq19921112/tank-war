@@ -1,4 +1,4 @@
-package com.chenwuqiang.tank.v1;
+package com.chenwuqiang.tank;
 
 public enum Dir {
     LEFT, RIGHT, UP, DOWN;

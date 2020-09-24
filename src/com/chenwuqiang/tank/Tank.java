@@ -1,4 +1,4 @@
-package com.chenwuqiang.tank.v1;
+package com.chenwuqiang.tank;
 
 import java.awt.*;
 import java.util.Random;
@@ -35,16 +35,16 @@ public class Tank {
         }
         switch (dir) {
             case UP:
-                g.drawImage(ResourceMgr.goodTankU, x, y, null);
+                g.drawImage(group == Group.GOOD ? ResourceMgr.goodTankU : ResourceMgr.badTankU, x, y, null);
                 break;
             case DOWN:
-                g.drawImage(ResourceMgr.goodTankD, x, y, null);
+                g.drawImage(group == Group.GOOD ? ResourceMgr.goodTankD : ResourceMgr.badTankD, x, y, null);
                 break;
             case LEFT:
-                g.drawImage(ResourceMgr.goodTankL, x, y, null);
+                g.drawImage(group == Group.GOOD ? ResourceMgr.goodTankL : ResourceMgr.badTankL, x, y, null);
                 break;
             case RIGHT:
-                g.drawImage(ResourceMgr.goodTankR, x, y, null);
+                g.drawImage(group == Group.GOOD ? ResourceMgr.goodTankR : ResourceMgr.badTankR, x, y, null);
                 break;
             default:
                 break;

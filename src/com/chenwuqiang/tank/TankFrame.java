@@ -1,4 +1,4 @@
-package com.chenwuqiang.tank.v1;
+package com.chenwuqiang.tank;
 
 import java.awt.*;
 import java.awt.event.KeyAdapter;
@@ -13,8 +13,8 @@ import java.util.List;
  * @date: 2020/8/30 0030 14:39
  **/
 public class TankFrame extends Frame {
-    public static final int FRAME_WIDTH = 800;
-    public static final int FRAME_HEIGHT = 600;
+    public static final int FRAME_WIDTH = 1920;
+    public static final int FRAME_HEIGHT = 1080;
     private static final int INIT_MY_TANK_X = 350;
     private static final int INIT_MY_TANK_Y = 400;
     private boolean bL = false;

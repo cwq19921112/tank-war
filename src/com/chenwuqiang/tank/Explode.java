@@ -1,4 +1,4 @@
-package com.chenwuqiang.tank.v1;
+package com.chenwuqiang.tank;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
