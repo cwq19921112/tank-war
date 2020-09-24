@@ -13,6 +13,8 @@ public class Tank {
     public static final int BAD_SPEED = 5;
     private int x;
     private int y;
+    private int width;
+    private int height;
     private boolean moving;
     private boolean alive = true;
     private int speed;
@@ -20,8 +22,6 @@ public class Tank {
     private TankFrame tankFrame;
     private Group group;
     private Random random = new Random();
-    public static final int WIDTH = ResourceMgr.goodTankU.getWidth();
-    public static final int HEIGHT = ResourceMgr.goodTankU.getHeight();
 
     public Tank(int x, int y, int speed, Dir dir, TankFrame tankFrame, Group group) {
         this.x = x;
@@ -30,6 +30,13 @@ public class Tank {
         this.tankFrame = tankFrame;
         this.group = group;
         this.speed = speed;
+        if (Group.GOOD == group) {
+            width = ResourceMgr.goodTankU.getWidth();
+            height = ResourceMgr.goodTankU.getHeight();
+        } else if (Group.BAD == group) {
+            width = ResourceMgr.badTankU.getWidth();
+            height = ResourceMgr.badTankU.getHeight();
+        }
     }
 
     public void paint(Graphics g) {
@@ -61,10 +68,30 @@ public class Tank {
         if (Group.BAD.equals(group) && random.nextInt(30) > 28) {
             fire();
         }
+        // 边界检测
+        checkBound();
+    }
+
+    /**
+     * 边界检测
+     */
+    private void checkBound() {
+        if (x < 2) {
+            x = 2;
+        }
+        if (x > TankFrame.FRAME_WIDTH - width) {
+            x = TankFrame.FRAME_WIDTH - width;
+        }
+        if (y < 2 + height / 2) {
+            y = 2 + height / 2;
+        }
+        if (y > TankFrame.FRAME_HEIGHT - height) {
+            y = TankFrame.FRAME_HEIGHT - height;
+        }
     }
 
     public void fire() {
-        Bullet bullet = new Bullet(x, y, dir, tankFrame, group);
+        Bullet bullet = new Bullet(x, y, dir, tankFrame, this, group);
         tankFrame.getBulletList().add(bullet);
     }
 
@@ -153,5 +180,21 @@ public class Tank {
 
     public void setSpeed(int speed) {
         this.speed = speed;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
     }
 }

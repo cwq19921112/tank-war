@@ -14,15 +14,17 @@ public class Bullet {
     private Dir dir;
     private Group group;
     private TankFrame tankFrame;
+    private Tank tank;
     public static final int WIDTH = ResourceMgr.bulletU.getWidth();
     public static final int HEIGHT = ResourceMgr.bulletU.getHeight();
 
-    public Bullet(int x, int y, Dir dir, TankFrame tankFrame, Group group) {
-        this.x = x + (Tank.WIDTH - WIDTH) / 2;
-        this.y = y + (Tank.HEIGHT - HEIGHT) / 2;
+    public Bullet(int x, int y, Dir dir, TankFrame tankFrame,Tank tank, Group group) {
+        this.x = x + (tank.getWidth() - WIDTH) / 2;
+        this.y = y + (tank.getHeight() - HEIGHT) / 2;
         this.dir = dir;
         this.tankFrame = tankFrame;
         this.group = group;
+        this.tank = tank;
     }
 
     public void paint(Graphics g) {
@@ -107,7 +109,7 @@ public class Bullet {
             return;
         }
         Rectangle rectangle1 = new Rectangle(x, y, WIDTH, HEIGHT);
-        Rectangle rectangle2 = new Rectangle(tank.getX(), tank.getY(), Tank.WIDTH, Tank.HEIGHT);
+        Rectangle rectangle2 = new Rectangle(tank.getX(), tank.getY(), tank.getWidth(), tank.getHeight());
         boolean intersects = rectangle1.intersects(rectangle2);
         if (intersects) {
             die();
