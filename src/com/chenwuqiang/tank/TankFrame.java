@@ -1,5 +1,7 @@
 package com.chenwuqiang.tank;
 
+import com.chenwuqiang.tank.mgr.PropMgr;
+
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -13,10 +15,10 @@ import java.util.List;
  * @date: 2020/8/30 0030 14:39
  **/
 public class TankFrame extends Frame {
-    public static final int FRAME_WIDTH = 1024;
-    public static final int FRAME_HEIGHT = 768;
-    private static final int INIT_MY_TANK_X = 350;
-    private static final int INIT_MY_TANK_Y = 400;
+    public static final int FRAME_WIDTH = PropMgr.getIntProp("frame.width");
+    public static final int FRAME_HEIGHT = PropMgr.getIntProp("frame.height");
+    private static final int INIT_MY_TANK_X = PropMgr.getIntProp("frame.goodTank.initX");
+    private static final int INIT_MY_TANK_Y = PropMgr.getIntProp("frame.goodTank.initY");
     private boolean bL = false;
     private boolean bR = false;
     private boolean bU = false;
@@ -39,8 +41,9 @@ public class TankFrame extends Frame {
         });
         addKeyListener(new MyKeyListener());
         // 初始化敌军坦克
-        for (int i = 0; i < 5; i++) {
-            Tank tank = new Tank(200 + 100 * i, 100, Tank.BAD_SPEED, Dir.DOWN, this, Group.BAD);
+        for (int i = 0; i < PropMgr.getIntProp("tank.badCount"); i++) {
+            Tank tank = new Tank(PropMgr.getIntProp("tank.badX") + PropMgr.getIntProp("tank.badGap") * i,
+                    PropMgr.getIntProp("tank.badY"), Tank.BAD_SPEED, Dir.DOWN, this, Group.BAD);
             tank.setMoving(true);
             badTankList.add(tank);
         }

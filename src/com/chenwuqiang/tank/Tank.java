@@ -1,5 +1,8 @@
 package com.chenwuqiang.tank;
 
+import com.chenwuqiang.tank.mgr.PropMgr;
+import com.chenwuqiang.tank.mgr.ResourceMgr;
+
 import java.awt.*;
 import java.util.Random;
 
@@ -8,9 +11,9 @@ import java.util.Random;
  * @date: 2020/8/30 0030 17:44
  **/
 public class Tank {
-    public static final int DEFAULT_SPEED = 5;
-    public static final int MAIN_SPEED = 8;
-    public static final int BAD_SPEED = 5;
+    public static final int DEFAULT_SPEED = PropMgr.getIntProp("tank.defaultSpeed");
+    public static final int MAIN_SPEED = PropMgr.getIntProp("tank.mainSpeed");
+    public static final int BAD_SPEED = PropMgr.getIntProp("tank.badSpeed");
     private int x;
     private int y;
     private int width;
@@ -75,11 +78,11 @@ public class Tank {
                 break;
         }
         // 敌方坦克随机改变方向
-        if (Group.BAD.equals(group) && random.nextInt(100) > 97) {
+        if (Group.BAD.equals(group) && random.nextInt(PropMgr.getIntProp("tank.changeDir.base")) > PropMgr.getIntProp("tank.changeDir.no")) {
             dir = Dir.values()[random.nextInt(Dir.values().length)];
         }
         move();
-        if (Group.BAD.equals(group) && random.nextInt(30) > 28) {
+        if (Group.BAD.equals(group) && random.nextInt(PropMgr.getIntProp("tank.fire.base")) > PropMgr.getIntProp("tank.fire.no")) {
             fire();
         }
         // 边界检测

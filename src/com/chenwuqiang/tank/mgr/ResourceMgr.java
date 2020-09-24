@@ -1,11 +1,10 @@
-package com.chenwuqiang.tank;
+package com.chenwuqiang.tank.mgr;
 
 import com.chenwuqiang.tank.utils.ImageUtil;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -1,5 +1,7 @@
 package com.chenwuqiang.tank;
 
+import com.chenwuqiang.tank.mgr.ResourceMgr;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.List;

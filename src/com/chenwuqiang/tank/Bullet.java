@@ -1,5 +1,8 @@
 package com.chenwuqiang.tank;
 
+import com.chenwuqiang.tank.mgr.PropMgr;
+import com.chenwuqiang.tank.mgr.ResourceMgr;
+
 import java.awt.*;
 
 /**
@@ -7,7 +10,7 @@ import java.awt.*;
  * @date: 2020/8/30 0030 19:50
  **/
 public class Bullet {
-    private static final int SPEED = 10;
+    private static final int SPEED = PropMgr.getIntProp("bullet.speed");
     private int x;
     private int y;
     private boolean isAlive = true;
