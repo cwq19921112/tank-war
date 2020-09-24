@@ -55,11 +55,13 @@ public class TankFrame extends Frame {
         g.drawString("敌方坦克的数量" + badTankList.size(), 10, 100);
         g.drawString("爆炸的数量" + explodeList.size(), 10, 120);
         g.setColor(color);
-        mainTank.paint(g);
+        // 先画子弹
         for (int i = 0; i < bulletList.size(); i++) {
             Bullet bullet = bulletList.get(i);
             bullet.paint(g);
         }
+        // 再画坦克
+        mainTank.paint(g);
         for (int i = 0; i < badTankList.size(); i++) {
             Tank badTank = badTankList.get(i);
             badTank.paint(g);

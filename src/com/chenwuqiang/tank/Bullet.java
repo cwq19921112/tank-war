@@ -15,16 +15,17 @@ public class Bullet {
     private Group group;
     private TankFrame tankFrame;
     private Tank tank;
-    public static final int WIDTH = ResourceMgr.bulletU.getWidth();
-    public static final int HEIGHT = ResourceMgr.bulletU.getHeight();
+    private int width;
+    private int height;
 
     public Bullet(int x, int y, Dir dir, TankFrame tankFrame,Tank tank, Group group) {
-        this.x = x + (tank.getWidth() - WIDTH) / 2;
-        this.y = y + (tank.getHeight() - HEIGHT) / 2;
         this.dir = dir;
         this.tankFrame = tankFrame;
         this.group = group;
         this.tank = tank;
+        setWH(dir);
+        this.x = x - width / 2;
+        this.y = y - height / 2;
     }
 
     public void paint(Graphics g) {
@@ -108,7 +109,7 @@ public class Bullet {
         if (group.equals(tank.getGroup())) {
             return;
         }
-        Rectangle rectangle1 = new Rectangle(x, y, WIDTH, HEIGHT);
+        Rectangle rectangle1 = new Rectangle(x, y, width, height);
         Rectangle rectangle2 = new Rectangle(tank.getX(), tank.getY(), tank.getWidth(), tank.getHeight());
         boolean intersects = rectangle1.intersects(rectangle2);
         if (intersects) {
@@ -128,5 +129,20 @@ public class Bullet {
 
     public void setGroup(Group group) {
         this.group = group;
+    }
+
+    private void setWH(Dir dir) {
+        switch (dir) {
+            case UP:
+            case DOWN:
+                width = ResourceMgr.bulletU.getWidth();
+                height = ResourceMgr.bulletU.getHeight();
+                break;
+            case LEFT:
+            case RIGHT:
+                width = ResourceMgr.bulletL.getWidth();
+                height = ResourceMgr.bulletL.getHeight();
+                break;
+        }
     }
 }

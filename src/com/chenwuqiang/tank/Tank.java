@@ -31,11 +31,25 @@ public class Tank {
         this.group = group;
         this.speed = speed;
         if (Group.GOOD == group) {
-            width = ResourceMgr.goodTankU.getWidth();
-            height = ResourceMgr.goodTankU.getHeight();
+            setWH(dir);
         } else if (Group.BAD == group) {
             width = ResourceMgr.badTankU.getWidth();
             height = ResourceMgr.badTankU.getHeight();
+        }
+    }
+
+    private void setWH(Dir dir) {
+        switch (dir) {
+            case UP:
+            case DOWN:
+                width = ResourceMgr.goodTankU.getWidth();
+                height = ResourceMgr.goodTankU.getHeight();
+                break;
+            case LEFT:
+            case RIGHT:
+                width = ResourceMgr.goodTankL.getWidth();
+                height = ResourceMgr.goodTankL.getHeight();
+                break;
         }
     }
 
@@ -91,7 +105,7 @@ public class Tank {
     }
 
     public void fire() {
-        Bullet bullet = new Bullet(x, y, dir, tankFrame, this, group);
+        Bullet bullet = new Bullet(x + width / 2, y + height / 2, dir, tankFrame, this, group);
         tankFrame.getBulletList().add(bullet);
     }
 
@@ -144,6 +158,7 @@ public class Tank {
 
     public void setDir(Dir dir) {
         this.dir = dir;
+        setWH(dir);
     }
 
     public boolean isMoving() {
