@@ -1,6 +1,7 @@
 package com.chenwuqiang.tank;
 
 import com.chenwuqiang.tank.mgr.PropMgr;
+import com.chenwuqiang.tank.strategy.FourDirFirStrategy;
 
 import java.awt.*;
 import java.awt.event.KeyAdapter;
@@ -121,7 +122,7 @@ public class TankFrame extends Frame {
                     bD = false;
                     break;
                 case 0x11:
-                    mainTank.fire();
+                    mainTank.fire(FourDirFirStrategy.getInstance());
                     break;
                 default:
                     break;

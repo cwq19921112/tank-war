@@ -2,6 +2,8 @@ package com.chenwuqiang.tank;
 
 import com.chenwuqiang.tank.mgr.PropMgr;
 import com.chenwuqiang.tank.mgr.ResourceMgr;
+import com.chenwuqiang.tank.strategy.DefaultFireStrategy;
+import com.chenwuqiang.tank.strategy.FireStrategy;
 
 import java.awt.*;
 import java.util.Random;
@@ -83,7 +85,7 @@ public class Tank {
         }
         move();
         if (Group.BAD.equals(group) && random.nextInt(PropMgr.getIntProp("tank.fire.base")) > PropMgr.getIntProp("tank.fire.no")) {
-            fire();
+            fire(DefaultFireStrategy.getInstance());
         }
         // 边界检测
         checkBound();
@@ -107,9 +109,8 @@ public class Tank {
         }
     }
 
-    public void fire() {
-        Bullet bullet = new Bullet(x + width / 2, y + height / 2, dir, tankFrame, this, group);
-        tankFrame.getBulletList().add(bullet);
+    public void fire(FireStrategy fireStrategy) {
+        fireStrategy.fire(this);
     }
 
     public void explode() {
@@ -214,5 +215,13 @@ public class Tank {
 
     public void setHeight(int height) {
         this.height = height;
+    }
+
+    public TankFrame getTankFrame() {
+        return tankFrame;
+    }
+
+    public void setTankFrame(TankFrame tankFrame) {
+        this.tankFrame = tankFrame;
     }
 }
