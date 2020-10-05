@@ -1,5 +1,9 @@
 package com.chenwuqiang.tank;
 
+import com.chenwuqiang.tank.factory.AbstractEntityFactory;
+import com.chenwuqiang.tank.factory.BaseExplode;
+import com.chenwuqiang.tank.factory.DefaultEntityFactory;
+import com.chenwuqiang.tank.factory.LowEntityFactory;
 import com.chenwuqiang.tank.mgr.PropMgr;
 import com.chenwuqiang.tank.mgr.ResourceMgr;
 import com.chenwuqiang.tank.strategy.DefaultFireStrategy;
@@ -13,6 +17,7 @@ import java.util.Random;
  * @date: 2020/8/30 0030 17:44
  **/
 public class Tank {
+    private static AbstractEntityFactory entityFactory = LowEntityFactory.getFactory();
     public static final int DEFAULT_SPEED = PropMgr.getIntProp("tank.defaultSpeed");
     public static final int MAIN_SPEED = PropMgr.getIntProp("tank.mainSpeed");
     public static final int BAD_SPEED = PropMgr.getIntProp("tank.badSpeed");
@@ -114,7 +119,7 @@ public class Tank {
     }
 
     public void explode() {
-        Explode explode = new Explode(x, y, tankFrame);
+        BaseExplode explode = entityFactory.createExplode(x, y, tankFrame);
         tankFrame.getExplodeList().add(explode);
     }
 

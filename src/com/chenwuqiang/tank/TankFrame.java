@@ -1,5 +1,6 @@
 package com.chenwuqiang.tank;
 
+import com.chenwuqiang.tank.factory.BaseExplode;
 import com.chenwuqiang.tank.mgr.PropMgr;
 import com.chenwuqiang.tank.strategy.FourDirFirStrategy;
 
@@ -27,7 +28,7 @@ public class TankFrame extends Frame {
     private Tank mainTank = new Tank(INIT_MY_TANK_X, INIT_MY_TANK_Y, Tank.MAIN_SPEED, Dir.UP, this, Group.GOOD);
     private List<Bullet> bulletList = new ArrayList<>();
     private List<Tank> badTankList = new ArrayList<>();
-    private List<Explode> explodeList = new ArrayList<>();
+    private List<BaseExplode> explodeList = new ArrayList<>();
 
     public TankFrame() {
         setSize(FRAME_WIDTH, FRAME_HEIGHT);
@@ -71,7 +72,7 @@ public class TankFrame extends Frame {
             badTank.paint(g);
         }
         for (int i = 0; i < explodeList.size(); i++) {
-            Explode explode = explodeList.get(i);
+            BaseExplode explode = explodeList.get(i);
             explode.paint(g);
         }
         // 碰撞检测
@@ -181,11 +182,11 @@ public class TankFrame extends Frame {
         this.badTankList = badTankList;
     }
 
-    public List<Explode> getExplodeList() {
+    public List<BaseExplode> getExplodeList() {
         return explodeList;
     }
 
-    public void setExplodeList(List<Explode> explodeList) {
+    public void setExplodeList(List<BaseExplode> explodeList) {
         this.explodeList = explodeList;
     }
 }

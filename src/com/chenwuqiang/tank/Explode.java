@@ -1,5 +1,6 @@
 package com.chenwuqiang.tank;
 
+import com.chenwuqiang.tank.factory.BaseExplode;
 import com.chenwuqiang.tank.mgr.ResourceMgr;
 
 import java.awt.*;
@@ -10,21 +11,12 @@ import java.util.List;
  * @author: Administrator
  * @date: 2020/9/8 0008 23:40
  **/
-public class Explode {
-    public static final int WIDTH = ResourceMgr.explodeImgs.get(0).getWidth();
-    public static final int HEIGHT = ResourceMgr.explodeImgs.get(0).getHeight();
-    private boolean alive = true;
-    private int x;
-    private int y;
-    private TankFrame tankFrame;
-    private int step = 0;
-
+public class Explode extends BaseExplode {
     public Explode(int x, int y, TankFrame tankFrame) {
-        this.x = x;
-        this.y = y;
-        this.tankFrame = tankFrame;
+        super(x, y, tankFrame);
     }
 
+    @Override
     public void paint(Graphics g) {
         if (!alive) {
             tankFrame.getExplodeList().remove(this);
@@ -35,29 +27,5 @@ public class Explode {
             step = 0;
             alive = false;
         }
-    }
-
-    public boolean isAlive() {
-        return alive;
-    }
-
-    public void setAlive(boolean alive) {
-        this.alive = alive;
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public void setY(int y) {
-        this.y = y;
     }
 }
