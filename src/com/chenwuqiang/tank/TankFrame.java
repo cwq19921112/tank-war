@@ -1,7 +1,11 @@
 package com.chenwuqiang.tank;
 
+import com.chenwuqiang.tank.factory.BaseBullet;
 import com.chenwuqiang.tank.factory.BaseExplode;
+import com.chenwuqiang.tank.factory.DefaultEntityFactory;
 import com.chenwuqiang.tank.mgr.PropMgr;
+import com.chenwuqiang.tank.strategy.DefaultFireStrategy;
+import com.chenwuqiang.tank.strategy.FireStrategy;
 import com.chenwuqiang.tank.strategy.FourDirFirStrategy;
 
 import java.awt.*;
@@ -17,6 +21,9 @@ import java.util.List;
  * @date: 2020/8/30 0030 14:39
  **/
 public class TankFrame extends Frame {
+    public static FireStrategy goodStrategy = FourDirFirStrategy.getInstance();
+    public static FireStrategy badStrategy = DefaultFireStrategy.getInstance();
+
     public static final int FRAME_WIDTH = PropMgr.getIntProp("frame.width");
     public static final int FRAME_HEIGHT = PropMgr.getIntProp("frame.height");
     private static final int INIT_MY_TANK_X = PropMgr.getIntProp("frame.goodTank.initX");
@@ -26,7 +33,7 @@ public class TankFrame extends Frame {
     private boolean bU = false;
     private boolean bD = false;
     private Tank mainTank = new Tank(INIT_MY_TANK_X, INIT_MY_TANK_Y, Tank.MAIN_SPEED, Dir.UP, this, Group.GOOD);
-    private List<Bullet> bulletList = new ArrayList<>();
+    private List<BaseBullet> bulletList = new ArrayList<>();
     private List<Tank> badTankList = new ArrayList<>();
     private List<BaseExplode> explodeList = new ArrayList<>();
 
@@ -62,7 +69,7 @@ public class TankFrame extends Frame {
         g.setColor(color);
         // 先画子弹
         for (int i = 0; i < bulletList.size(); i++) {
-            Bullet bullet = bulletList.get(i);
+            BaseBullet bullet = bulletList.get(i);
             bullet.paint(g);
         }
         // 再画坦克
@@ -76,7 +83,7 @@ public class TankFrame extends Frame {
             explode.paint(g);
         }
         // 碰撞检测
-        for (Bullet bullet : bulletList) {
+        for (BaseBullet bullet : bulletList) {
             for (Tank tank : badTankList) {
                 bullet.collideWith(tank);
             }
@@ -123,7 +130,7 @@ public class TankFrame extends Frame {
                     bD = false;
                     break;
                 case 0x11:
-                    mainTank.fire(FourDirFirStrategy.getInstance());
+                    mainTank.fire(TankFrame.goodStrategy);
                     break;
                 default:
                     break;
@@ -151,11 +158,11 @@ public class TankFrame extends Frame {
         }
     }
 
-    public List<Bullet> getBulletList() {
+    public List<BaseBullet> getBulletList() {
         return bulletList;
     }
 
-    public void setBulletList(List<Bullet> bulletList) {
+    public void setBulletList(List<BaseBullet> bulletList) {
         this.bulletList = bulletList;
     }
 

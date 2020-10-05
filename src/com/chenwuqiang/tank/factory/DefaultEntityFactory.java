@@ -1,7 +1,6 @@
 package com.chenwuqiang.tank.factory;
 
-import com.chenwuqiang.tank.Explode;
-import com.chenwuqiang.tank.TankFrame;
+import com.chenwuqiang.tank.*;
 
 /**
  * @author: Administrator
@@ -17,6 +16,11 @@ public class DefaultEntityFactory extends AbstractEntityFactory {
     @Override
     public BaseExplode createExplode(int x, int y, TankFrame tankFrame) {
         return new Explode(x, y, tankFrame);
+    }
+
+    @Override
+    public BaseBullet createBullet(int x, int y, Dir dir, TankFrame tankFrame, Tank tank, Group group) {
+        return new Bullet(x, y, dir, tankFrame, tank, group);
     }
 
     public static AbstractEntityFactory getFactory() {

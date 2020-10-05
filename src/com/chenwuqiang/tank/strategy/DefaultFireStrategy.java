@@ -1,7 +1,7 @@
 package com.chenwuqiang.tank.strategy;
 
-import com.chenwuqiang.tank.Bullet;
 import com.chenwuqiang.tank.Tank;
+import com.chenwuqiang.tank.factory.BaseBullet;
 
 public class DefaultFireStrategy implements FireStrategy {
     private static FireStrategy fireStrategy = new DefaultFireStrategy();
@@ -12,7 +12,7 @@ public class DefaultFireStrategy implements FireStrategy {
 
     @Override
     public void fire(Tank tank) {
-        Bullet bullet = new Bullet(tank.getX() + tank.getWidth() / 2, tank.getY() + tank.getHeight() / 2, tank.getDir(),
+        BaseBullet bullet = tank.getEntityFactory().createBullet(tank.getX() + tank.getWidth() / 2, tank.getY() + tank.getHeight() / 2, tank.getDir(),
                 tank.getTankFrame(), tank, tank.getGroup());
         tank.getTankFrame().getBulletList().add(bullet);
     }

@@ -17,7 +17,7 @@ import java.util.Random;
  * @date: 2020/8/30 0030 17:44
  **/
 public class Tank {
-    private static AbstractEntityFactory entityFactory = LowEntityFactory.getFactory();
+    public AbstractEntityFactory entityFactory = LowEntityFactory.getFactory();
     public static final int DEFAULT_SPEED = PropMgr.getIntProp("tank.defaultSpeed");
     public static final int MAIN_SPEED = PropMgr.getIntProp("tank.mainSpeed");
     public static final int BAD_SPEED = PropMgr.getIntProp("tank.badSpeed");
@@ -90,7 +90,7 @@ public class Tank {
         }
         move();
         if (Group.BAD.equals(group) && random.nextInt(PropMgr.getIntProp("tank.fire.base")) > PropMgr.getIntProp("tank.fire.no")) {
-            fire(DefaultFireStrategy.getInstance());
+            fire(TankFrame.badStrategy);
         }
         // 边界检测
         checkBound();
@@ -228,5 +228,13 @@ public class Tank {
 
     public void setTankFrame(TankFrame tankFrame) {
         this.tankFrame = tankFrame;
+    }
+
+    public AbstractEntityFactory getEntityFactory() {
+        return entityFactory;
+    }
+
+    public void setEntityFactory(AbstractEntityFactory entityFactory) {
+        this.entityFactory = entityFactory;
     }
 }
