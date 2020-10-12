@@ -16,6 +16,7 @@ public class Tank {
     public static final int DEFAULT_SPEED = PropMgr.getIntProp("tank.defaultSpeed");
     public static final int MAIN_SPEED = PropMgr.getIntProp("tank.mainSpeed");
     public static final int BAD_SPEED = PropMgr.getIntProp("tank.badSpeed");
+    private static FireStrategy badFireStrategy = DefaultFireStrategy.getInstance();
     private int x;
     private int y;
     private int width;
@@ -85,7 +86,7 @@ public class Tank {
         }
         move();
         if (Group.BAD.equals(group) && random.nextInt(PropMgr.getIntProp("tank.fire.base")) > PropMgr.getIntProp("tank.fire.no")) {
-            fire(DefaultFireStrategy.getInstance());
+            fire(badFireStrategy);
         }
         // 边界检测
         checkBound();

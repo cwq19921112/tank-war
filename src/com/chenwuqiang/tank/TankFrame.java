@@ -1,6 +1,7 @@
 package com.chenwuqiang.tank;
 
 import com.chenwuqiang.tank.mgr.PropMgr;
+import com.chenwuqiang.tank.strategy.FireStrategy;
 import com.chenwuqiang.tank.strategy.FourDirFirStrategy;
 
 import java.awt.*;
@@ -20,6 +21,7 @@ public class TankFrame extends Frame {
     public static final int FRAME_HEIGHT = PropMgr.getIntProp("frame.height");
     private static final int INIT_MY_TANK_X = PropMgr.getIntProp("frame.goodTank.initX");
     private static final int INIT_MY_TANK_Y = PropMgr.getIntProp("frame.goodTank.initY");
+    private static FireStrategy goodFireStrategy = FourDirFirStrategy.getInstance();
     private boolean bL = false;
     private boolean bR = false;
     private boolean bU = false;
@@ -122,7 +124,7 @@ public class TankFrame extends Frame {
                     bD = false;
                     break;
                 case 0x11:
-                    mainTank.fire(FourDirFirStrategy.getInstance());
+                    mainTank.fire(goodFireStrategy);
                     break;
                 default:
                     break;
