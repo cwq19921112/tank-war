@@ -2,6 +2,7 @@ package com.chenwuqiang.tank;
 
 import com.chenwuqiang.tank.mgr.PropMgr;
 import com.chenwuqiang.tank.mgr.ResourceMgr;
+import com.chenwuqiang.tank.model.GameModel;
 
 import java.awt.*;
 
@@ -16,18 +17,16 @@ public class Bullet {
     private boolean isAlive = true;
     private Dir dir;
     private Group group;
-    private TankFrame tankFrame;
-    private Tank tank;
+    private GameModel gm;
     private int width;
     private int height;
     Rectangle rectangle1 = new Rectangle();
     Rectangle rectangle2 = new Rectangle();
 
-    public Bullet(int x, int y, Dir dir, TankFrame tankFrame,Tank tank, Group group) {
+    public Bullet(int x, int y, Dir dir, GameModel gm, Group group) {
         this.dir = dir;
-        this.tankFrame = tankFrame;
         this.group = group;
-        this.tank = tank;
+        this.gm = gm;
         setWH(dir);
         this.x = x - width / 2;
         this.y = y - height / 2;
@@ -35,7 +34,7 @@ public class Bullet {
 
     public void paint(Graphics g) {
         if (!isAlive) {
-            tankFrame.getBulletList().remove(this);
+            gm.getBulletList().remove(this);
         }
         switch (dir) {
             case UP:

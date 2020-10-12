@@ -13,8 +13,8 @@ public class DefaultFireStrategy implements FireStrategy {
     @Override
     public void fire(Tank tank) {
         Bullet bullet = new Bullet(tank.getX() + tank.getWidth() / 2, tank.getY() + tank.getHeight() / 2, tank.getDir(),
-                tank.getTankFrame(), tank, tank.getGroup());
-        tank.getTankFrame().getBulletList().add(bullet);
+                tank.getGm(), tank.getGroup());
+        tank.getGm().getBulletList().add(bullet);
     }
 
     public static FireStrategy getInstance() {

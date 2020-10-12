@@ -2,6 +2,7 @@ package com.chenwuqiang.tank;
 
 import com.chenwuqiang.tank.mgr.PropMgr;
 import com.chenwuqiang.tank.mgr.ResourceMgr;
+import com.chenwuqiang.tank.model.GameModel;
 import com.chenwuqiang.tank.strategy.DefaultFireStrategy;
 import com.chenwuqiang.tank.strategy.FireStrategy;
 
@@ -25,15 +26,15 @@ public class Tank {
     private boolean alive = true;
     private int speed;
     private Dir dir;
-    private TankFrame tankFrame;
+    private GameModel gm;
     private Group group;
     private Random random = new Random();
 
-    public Tank(int x, int y, int speed, Dir dir, TankFrame tankFrame, Group group) {
+    public Tank(int x, int y, int speed, Dir dir, GameModel gm, Group group) {
         this.x = x;
         this.y = y;
         this.dir = dir;
-        this.tankFrame = tankFrame;
+        this.gm = gm;
         this.group = group;
         this.speed = speed;
         if (Group.GOOD == group) {
@@ -61,7 +62,7 @@ public class Tank {
 
     public void paint(Graphics g) {
         if (!alive) {
-            tankFrame.getBadTankList().remove(this);
+            gm.getBadTankList().remove(this);
             return;
         }
         switch (dir) {
@@ -115,8 +116,8 @@ public class Tank {
     }
 
     public void explode() {
-        Explode explode = new Explode(x, y, tankFrame);
-        tankFrame.getExplodeList().add(explode);
+        Explode explode = new Explode(x, y, gm);
+        gm.getExplodeList().add(explode);
     }
 
     private void move() {
@@ -218,11 +219,11 @@ public class Tank {
         this.height = height;
     }
 
-    public TankFrame getTankFrame() {
-        return tankFrame;
+    public GameModel getGm() {
+        return gm;
     }
 
-    public void setTankFrame(TankFrame tankFrame) {
-        this.tankFrame = tankFrame;
+    public void setGm(GameModel gm) {
+        this.gm = gm;
     }
 }

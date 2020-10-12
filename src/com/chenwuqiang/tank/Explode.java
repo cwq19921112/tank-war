@@ -1,6 +1,7 @@
 package com.chenwuqiang.tank;
 
 import com.chenwuqiang.tank.mgr.ResourceMgr;
+import com.chenwuqiang.tank.model.GameModel;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -16,18 +17,18 @@ public class Explode {
     private boolean alive = true;
     private int x;
     private int y;
-    private TankFrame tankFrame;
+    private GameModel gm;
     private int step = 0;
 
-    public Explode(int x, int y, TankFrame tankFrame) {
+    public Explode(int x, int y, GameModel gm) {
         this.x = x;
         this.y = y;
-        this.tankFrame = tankFrame;
+        this.gm = gm;
     }
 
     public void paint(Graphics g) {
         if (!alive) {
-            tankFrame.getExplodeList().remove(this);
+            gm.getExplodeList().remove(this);
         }
         List<BufferedImage> explodeImgs = ResourceMgr.explodeImgs;
         g.drawImage(explodeImgs.get(step++), x, y, null);
