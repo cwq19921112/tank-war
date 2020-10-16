@@ -3,6 +3,7 @@ package com.chenwuqiang.tank;
 import com.chenwuqiang.tank.mgr.PropMgr;
 import com.chenwuqiang.tank.mgr.ResourceMgr;
 import com.chenwuqiang.tank.model.GameModel;
+import com.chenwuqiang.tank.model.GameObject;
 
 import java.awt.*;
 
@@ -10,10 +11,8 @@ import java.awt.*;
  * @author: Administrator
  * @date: 2020/8/30 0030 19:50
  **/
-public class Bullet {
+public class Bullet extends GameObject {
     private static final int SPEED = PropMgr.getIntProp("bullet.speed");
-    private int x;
-    private int y;
     private boolean isAlive = true;
     private Dir dir;
     private Group group;
@@ -34,7 +33,7 @@ public class Bullet {
 
     public void paint(Graphics g) {
         if (!isAlive) {
-            gm.getBulletList().remove(this);
+            gm.removeGameObj(this);
         }
         switch (dir) {
             case UP:

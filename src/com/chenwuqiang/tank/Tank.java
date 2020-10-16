@@ -3,6 +3,7 @@ package com.chenwuqiang.tank;
 import com.chenwuqiang.tank.mgr.PropMgr;
 import com.chenwuqiang.tank.mgr.ResourceMgr;
 import com.chenwuqiang.tank.model.GameModel;
+import com.chenwuqiang.tank.model.GameObject;
 import com.chenwuqiang.tank.strategy.DefaultFireStrategy;
 import com.chenwuqiang.tank.strategy.FireStrategy;
 
@@ -13,13 +14,11 @@ import java.util.Random;
  * @author: Administrator
  * @date: 2020/8/30 0030 17:44
  **/
-public class Tank {
+public class Tank extends GameObject {
     public static final int DEFAULT_SPEED = PropMgr.getIntProp("tank.defaultSpeed");
     public static final int MAIN_SPEED = PropMgr.getIntProp("tank.mainSpeed");
     public static final int BAD_SPEED = PropMgr.getIntProp("tank.badSpeed");
     private static FireStrategy badFireStrategy = DefaultFireStrategy.getInstance();
-    private int x;
-    private int y;
     private int width;
     private int height;
     private boolean moving;
@@ -31,8 +30,7 @@ public class Tank {
     private Random random = new Random();
 
     public Tank(int x, int y, int speed, Dir dir, GameModel gm, Group group) {
-        this.x = x;
-        this.y = y;
+        super(x, y);
         this.dir = dir;
         this.gm = gm;
         this.group = group;
@@ -62,7 +60,7 @@ public class Tank {
 
     public void paint(Graphics g) {
         if (!alive) {
-            gm.getBadTankList().remove(this);
+            gm.removeGameObj(this);
             return;
         }
         switch (dir) {
@@ -117,7 +115,7 @@ public class Tank {
 
     public void explode() {
         Explode explode = new Explode(x, y, gm);
-        gm.getExplodeList().add(explode);
+        gm.addGameObj(explode);
     }
 
     private void move() {

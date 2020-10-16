@@ -14,7 +14,7 @@ public class DefaultFireStrategy implements FireStrategy {
     public void fire(Tank tank) {
         Bullet bullet = new Bullet(tank.getX() + tank.getWidth() / 2, tank.getY() + tank.getHeight() / 2, tank.getDir(),
                 tank.getGm(), tank.getGroup());
-        tank.getGm().getBulletList().add(bullet);
+        tank.getGm().addGameObj(bullet);
     }
 
     public static FireStrategy getInstance() {

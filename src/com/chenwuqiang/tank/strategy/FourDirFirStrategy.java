@@ -22,7 +22,7 @@ public class FourDirFirStrategy implements FireStrategy {
         for (Dir dir : dirs) {
             Bullet bullet = new Bullet(tank.getX() + tank.getWidth() / 2, tank.getY() + tank.getHeight() / 2, dir,
                     tank.getGm(), tank.getGroup());
-            tank.getGm().getBulletList().add(bullet);
+            tank.getGm().addGameObj(bullet);
         }
     }
 }
