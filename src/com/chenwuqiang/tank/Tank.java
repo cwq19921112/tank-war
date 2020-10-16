@@ -28,6 +28,8 @@ public class Tank extends GameObject {
     private GameModel gm;
     private Group group;
     private Random random = new Random();
+    private int preX;
+    private int preY;
 
     public Tank(int x, int y, int speed, Dir dir, GameModel gm, Group group) {
         super(x, y);
@@ -36,14 +38,16 @@ public class Tank extends GameObject {
         this.group = group;
         this.speed = speed;
         if (Group.GOOD == group) {
-            setWH(dir);
+            setWH();
         } else if (Group.BAD == group) {
             width = ResourceMgr.badTankU.getWidth();
             height = ResourceMgr.badTankU.getHeight();
         }
+        preX = x;
+        preY = y;
     }
 
-    private void setWH(Dir dir) {
+    public void setWH() {
         switch (dir) {
             case UP:
             case DOWN:
@@ -119,6 +123,8 @@ public class Tank extends GameObject {
     }
 
     private void move() {
+        preX = x;
+        preY = y;
         if (!moving) {
             return;
         }
@@ -138,6 +144,10 @@ public class Tank extends GameObject {
             default:
                 break;
         }
+    }
+
+    public void stop() {
+        moving = false;
     }
 
     public int getX() {
@@ -162,7 +172,7 @@ public class Tank extends GameObject {
 
     public void setDir(Dir dir) {
         this.dir = dir;
-        setWH(dir);
+        setWH();
     }
 
     public boolean isMoving() {
@@ -223,5 +233,21 @@ public class Tank extends GameObject {
 
     public void setGm(GameModel gm) {
         this.gm = gm;
+    }
+
+    public int getPreX() {
+        return preX;
+    }
+
+    public void setPreX(int preX) {
+        this.preX = preX;
+    }
+
+    public int getPreY() {
+        return preY;
+    }
+
+    public void setPreY(int preY) {
+        this.preY = preY;
     }
 }

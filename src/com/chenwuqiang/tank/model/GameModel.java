@@ -1,6 +1,10 @@
 package com.chenwuqiang.tank.model;
 
 import com.chenwuqiang.tank.*;
+import com.chenwuqiang.tank.chain.ColliderChain;
+import com.chenwuqiang.tank.collider.Collider;
+import com.chenwuqiang.tank.collider.TankBulletCollider;
+import com.chenwuqiang.tank.collider.TankTankCollider;
 import com.chenwuqiang.tank.mgr.PropMgr;
 
 import java.awt.*;
@@ -15,10 +19,8 @@ public class GameModel {
     private static final int INIT_MY_TANK_Y = PropMgr.getIntProp("frame.goodTank.initY");
 
     private Tank mainTank = new Tank(INIT_MY_TANK_X, INIT_MY_TANK_Y, Tank.MAIN_SPEED, Dir.UP, this, Group.GOOD);
-//    private List<Bullet> bulletList = new ArrayList<>();
-//    private List<Tank> badTankList = new ArrayList<>();
-//    private List<Explode> explodeList = new ArrayList<>();
     private List<GameObject> gameObjects = new ArrayList<>();
+    private ColliderChain colliderChain = new ColliderChain();
 
     public GameModel() {
         // 初始化敌军坦克
@@ -49,15 +51,13 @@ public class GameModel {
         for (int i = 0; i < gameObjects.size(); i++) {
             gameObjects.get(i).paint(g);
         }
-        // 再画坦克
         mainTank.paint(g);
-
-        // 碰撞检测
-        /*for (Bullet bullet : bulletList) {
-            for (Tank tank : badTankList) {
-                bullet.collideWith(tank);
+        for (int i = 0; i < gameObjects.size(); i++) {
+            for (int j = i + 1; j < gameObjects.size(); j++) {
+                colliderChain.collider(gameObjects.get(i), gameObjects.get(j));
             }
-        }*/
+        }
+
     }
 
     public Tank getMainTank() {
