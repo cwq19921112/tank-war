@@ -2,9 +2,6 @@ package com.chenwuqiang.tank.model;
 
 import com.chenwuqiang.tank.*;
 import com.chenwuqiang.tank.chain.ColliderChain;
-import com.chenwuqiang.tank.collider.Collider;
-import com.chenwuqiang.tank.collider.TankBulletCollider;
-import com.chenwuqiang.tank.collider.TankTankCollider;
 import com.chenwuqiang.tank.mgr.PropMgr;
 
 import java.awt.*;
@@ -23,6 +20,11 @@ public class GameModel {
     private ColliderChain colliderChain = new ColliderChain();
 
     public GameModel() {
+        // 初始化墙
+        addGameObj(new Wall(100,200));
+        addGameObj(new Wall(300,400));
+        addGameObj(new Wall(500,600));
+        addGameObj(new Wall(600,200));
         // 初始化敌军坦克
         for (int i = 0; i < PropMgr.getIntProp("tank.badCount"); i++) {
             Tank tank = new Tank(PropMgr.getIntProp("tank.badX") + PropMgr.getIntProp("tank.badGap") * i,

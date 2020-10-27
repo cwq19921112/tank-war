@@ -1,8 +1,6 @@
 package com.chenwuqiang.tank.chain;
 
-import com.chenwuqiang.tank.collider.Collider;
-import com.chenwuqiang.tank.collider.TankBulletCollider;
-import com.chenwuqiang.tank.collider.TankTankCollider;
+import com.chenwuqiang.tank.collider.*;
 import com.chenwuqiang.tank.model.GameObject;
 
 import java.util.LinkedList;
@@ -14,6 +12,8 @@ public class ColliderChain implements Collider {
     public ColliderChain() {
         add(new TankBulletCollider());
         add(new TankTankCollider());
+        add(new TandWallCollider());
+        add(new WallBulletCollider());
     }
 
     public void add(Collider collider) {
