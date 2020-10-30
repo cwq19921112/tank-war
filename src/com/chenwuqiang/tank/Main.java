@@ -9,7 +9,7 @@ public class Main {
         TankFrame tankFrame = new TankFrame();
         while (true) {
             tankFrame.repaint();
-            Thread.sleep(50);
+            Thread.sleep(200);
         }
     }
 }

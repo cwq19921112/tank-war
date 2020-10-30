@@ -1,6 +1,7 @@
 package com.chenwuqiang.tank.collider;
 
 import com.chenwuqiang.tank.Bullet;
+import com.chenwuqiang.tank.Bulletable;
 import com.chenwuqiang.tank.Tank;
 import com.chenwuqiang.tank.model.GameObject;
 
@@ -12,9 +13,9 @@ public class TankBulletCollider implements Collider {
 
     @Override
     public boolean collider(GameObject gbj1, GameObject gbj2) {
-        if (gbj1 instanceof Tank && gbj2 instanceof Bullet) {
+        if (gbj1 instanceof Tank && gbj2 instanceof Bulletable) {
             Tank tank = (Tank) gbj1;
-            Bullet bullet = (Bullet) gbj2;
+            Bulletable bullet = (Bulletable) gbj2;
             if (bullet.getGroup().equals(tank.getGroup())) {
                 return true;
             }
@@ -27,7 +28,7 @@ public class TankBulletCollider implements Collider {
                 tank.explode();
                 return false;
             }
-        } else if (gbj1 instanceof Bullet && gbj2 instanceof Tank) {
+        } else if (gbj1 instanceof Bulletable && gbj2 instanceof Tank) {
             collider(gbj2, gbj1);
         }
         return true;

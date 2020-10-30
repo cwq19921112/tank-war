@@ -39,7 +39,7 @@ public class GameModel {
     }
 
     public void removeGameObj(GameObject gameObject) {
-        gameObjects.remove(gameObject);
+        boolean remove = gameObjects.remove(gameObject);
     }
 
     public void paint(Graphics g) {

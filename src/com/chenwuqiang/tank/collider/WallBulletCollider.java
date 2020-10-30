@@ -1,6 +1,7 @@
 package com.chenwuqiang.tank.collider;
 
 import com.chenwuqiang.tank.Bullet;
+import com.chenwuqiang.tank.Bulletable;
 import com.chenwuqiang.tank.Wall;
 import com.chenwuqiang.tank.model.GameObject;
 
@@ -11,9 +12,9 @@ public class WallBulletCollider implements Collider {
 
     @Override
     public boolean collider(GameObject gbj1, GameObject gbj2) {
-        if (gbj1 instanceof Wall && gbj2 instanceof Bullet) {
+        if (gbj1 instanceof Wall && gbj2 instanceof Bulletable) {
             Wall wall = (Wall) gbj1;
-            Bullet bullet = (Bullet) gbj2;
+            Bulletable bullet = (Bulletable) gbj2;
 
             changeRec(rectangle, bullet.getX(), bullet.getY(), bullet.getWidth(), bullet.getHeight());
             boolean intersects = rectangle.intersects(wall.getRect());
@@ -21,7 +22,7 @@ public class WallBulletCollider implements Collider {
                 bullet.die();
                 return false;
             }
-        } else if (gbj1 instanceof Bullet && gbj2 instanceof Wall) {
+        } else if (gbj1 instanceof Bulletable && gbj2 instanceof Wall) {
             collider(gbj2, gbj1);
         }
         return true;

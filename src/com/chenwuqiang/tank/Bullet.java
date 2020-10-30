@@ -11,14 +11,12 @@ import java.awt.*;
  * @author: Administrator
  * @date: 2020/8/30 0030 19:50
  **/
-public class Bullet extends GameObject {
+public class Bullet extends GameObject implements Bulletable{
     private static final int SPEED = PropMgr.getIntProp("bullet.speed");
     private boolean isAlive = true;
     private Dir dir;
     private Group group;
     private GameModel gm;
-    private int width;
-    private int height;
 
     public Bullet(int x, int y, Dir dir, GameModel gm, Group group) {
         this.dir = dir;
@@ -29,6 +27,7 @@ public class Bullet extends GameObject {
         this.y = y - height / 2;
     }
 
+    @Override
     public void paint(Graphics g) {
         if (!isAlive) {
             gm.removeGameObj(this);
@@ -133,19 +132,11 @@ public class Bullet extends GameObject {
         }
     }
 
-    public int getWidth() {
-        return width;
+    public GameModel getGm() {
+        return gm;
     }
 
-    public void setWidth(int width) {
-        this.width = width;
-    }
-
-    public int getHeight() {
-        return height;
-    }
-
-    public void setHeight(int height) {
-        this.height = height;
+    public void setGm(GameModel gm) {
+        this.gm = gm;
     }
 }

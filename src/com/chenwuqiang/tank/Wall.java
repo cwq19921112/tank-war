@@ -6,8 +6,6 @@ import com.chenwuqiang.tank.model.GameObject;
 import java.awt.*;
 
 public class Wall extends GameObject {
-    private int width;
-    private int height;
     private Rectangle rect;
 
     public Wall(int x, int y) {
@@ -27,22 +25,6 @@ public class Wall extends GameObject {
         g.setColor(Color.LIGHT_GRAY);
         g.fillRect(x, y, width, height);
         g.setColor(color);
-    }
-
-    public int getWidth() {
-        return width;
-    }
-
-    public void setWidth(int width) {
-        this.width = width;
-    }
-
-    public int getHeight() {
-        return height;
-    }
-
-    public void setHeight(int height) {
-        this.height = height;
     }
 
     public Rectangle getRect() {

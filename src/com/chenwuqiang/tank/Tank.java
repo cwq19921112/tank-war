@@ -19,8 +19,6 @@ public class Tank extends GameObject {
     public static final int MAIN_SPEED = PropMgr.getIntProp("tank.mainSpeed");
     public static final int BAD_SPEED = PropMgr.getIntProp("tank.badSpeed");
     private static FireStrategy badFireStrategy = DefaultFireStrategy.getInstance();
-    private int width;
-    private int height;
     private boolean moving;
     private boolean alive = true;
     private int speed;
@@ -209,22 +207,6 @@ public class Tank extends GameObject {
 
     public void setSpeed(int speed) {
         this.speed = speed;
-    }
-
-    public int getWidth() {
-        return width;
-    }
-
-    public void setWidth(int width) {
-        this.width = width;
-    }
-
-    public int getHeight() {
-        return height;
-    }
-
-    public void setHeight(int height) {
-        this.height = height;
     }
 
     public GameModel getGm() {
